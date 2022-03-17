@@ -1,0 +1,7 @@
+import kotlin.random.Random
+
+fun randomSizes(n: Int): List<Int> = (1..2 * n).asSequence().shuffled().take(n).toList()
+fun randomArrays(n: Int): Array<Array<Int>> = randomSizes(n).map { Array(it) { Random.nextInt() } }.toTypedArray()
+fun sortedRandomArrays(n: Int): Array<Array<Int>> = randomArrays(n).apply {
+    forEachIndexed { i, array -> (1 - (i % 2) * 2).let { order -> array.sortBy { it * order } } }
+}
